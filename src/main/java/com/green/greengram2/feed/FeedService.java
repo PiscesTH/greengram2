@@ -29,7 +29,7 @@ public class FeedService {
         int result2 = mapper.insFeedPic(dto2);
         return new ResVo(dto1.getIfeed());
     }
-
+    //N + 1 허용 방법
     public List<FeedSelVo> getFeedAll(FeedSelDto dto){
         List<FeedSelVo> list = mapper.selFeedAll(dto);
         for (FeedSelVo vo : list) {
