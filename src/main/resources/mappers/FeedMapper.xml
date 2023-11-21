@@ -19,7 +19,19 @@
     </insert>
 
     <select id="selFeedAll">
-        SELECT
-        FROM
+        SELECT A.ifeed, A.contents, A.location, A.iuser AS writerIuser, C.nm AS writerNm,
+        A.created_at AS createdAt, if(B.ifeed > 0, 1, 0) AS isFav
+        FROM t_feed A
+        LEFT JOIN t_feed_fav B
+        ON A.ifeed = B.ifeed
+        AND B.iuser = #{loginedIuser}
+        JOIN t_user C
+        ON A.iuser = C.iuser
+        <if test="targetIuser > 0">
+            WHERE A.iuser = #{targetIuser}
+        </if>
+        ORDER BY A.ifeed DESC
+        LIMIT #{startIdx}, #{rowCount}
     </select>
+
 </mapper>

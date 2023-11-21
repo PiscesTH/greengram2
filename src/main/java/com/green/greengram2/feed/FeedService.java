@@ -13,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FeedService {
     private final FeedMapper mapper;
+    private final FeedPicsMapper picsMapper;
 
     public ResVo postFeed(FeedInsDto dto){
         FeedInsPrcoDto dto1 = FeedInsPrcoDto.builder()
@@ -30,6 +31,10 @@ public class FeedService {
     }
 
     public List<FeedSelVo> getFeedAll(FeedSelDto dto){
-        return null;
+        List<FeedSelVo> list = mapper.selFeedAll(dto);
+        for (FeedSelVo vo : list) {
+            vo.setPics(picsMapper.selFeedPicsAll(vo.getIfeed()));
+        }
+        return list;
     }
 }
