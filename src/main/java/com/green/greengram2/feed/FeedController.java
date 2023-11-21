@@ -36,7 +36,6 @@ public class FeedController {
     public List<FeedSelVo> getFeedAll(int page, int loginedIuser,
                                       @RequestParam(defaultValue = "0", required = false) int targetIuser) {
         //@RequestParam 쿼리스트링으로 요청 받을 때 파라미터 앞에 자동으로 붙음. defaultValue 없이 값 안 보내면 에러
-        log.info("targetIuser : {}", targetIuser);
         final int ROW_COUNT = 30;
         return service.getFeedAll(FeedSelDto.builder()
                 .loginedIuser(loginedIuser)
