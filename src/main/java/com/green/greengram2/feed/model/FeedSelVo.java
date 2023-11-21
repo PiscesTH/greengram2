@@ -1,7 +1,6 @@
 package com.green.greengram2.feed.model;
 
 import lombok.Data;
-import lombok.Getter;
 
 import java.util.List;
 
@@ -12,6 +11,7 @@ public class FeedSelVo {
     private String location;
     private int writerIuser;
     private String writerNm;
+    private String writerPic;
     private String createdAt;
     private int isFav;
     private List<String> pics;
