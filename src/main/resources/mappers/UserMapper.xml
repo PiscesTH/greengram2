@@ -29,4 +29,15 @@
         FROM t_user
         WHERE uid = #{uid}
     </select>
+
+    <select id="selUserProfile">
+        SELECT COUNT(DISTINCT B.ifeed) AS feedCnt, COUNT(C.iuser) AS favCnt,
+        A.nm, DATE(A.created_at) AS createdAt
+        FROM t_user A
+        LEFT JOIN t_feed B
+        ON A.iuser = B.iuser
+        LEFT JOIN t_feed_fav C
+        ON B.ifeed = C.ifeed
+        WHERE A.iuser = #{targetIuser}
+    </select>
 </mapper>

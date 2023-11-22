@@ -1,6 +1,7 @@
 package com.green.greengram2.user;
 
 import com.green.greengram2.ResVo;
+import com.green.greengram2.user.model.UserInfoVo;
 import com.green.greengram2.user.model.UserSigninDto;
 import com.green.greengram2.user.model.UserSigninVo;
 import com.green.greengram2.user.model.UserSignupDto;
@@ -23,7 +24,7 @@ public class UserController {
 
     @Operation(summary = "인증", description = "아이디/비밀번호를 활용한 인증처리")
     @Parameters(value = {
-    //@Parameter 를 여러 개 받는 용도
+            //@Parameter 를 여러 개 받는 용도
             @Parameter(name = "uid", description = "아이디"),
             @Parameter(name = "upw", description = "비밀번호"),
             //하나의 파라미터에 대한 설명
@@ -46,5 +47,10 @@ public class UserController {
         //System.out.println(dto); 사용안하기
         //log.info("dto: {}", dto);
         return service.postSignup(dto); // insert한 레코드 pk값 담아서 응답처리
+    }
+
+    @GetMapping
+    public UserInfoVo getProfileInfo(@RequestParam(value = "target_iuser") int targetIuser) { // [ value = ]생략 가능
+        return service.getProfileInfo(targetIuser);
     }
 }

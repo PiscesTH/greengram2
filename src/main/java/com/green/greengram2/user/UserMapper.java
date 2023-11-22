@@ -9,4 +9,5 @@ public interface UserMapper {
     String selUpwByUid(String uid);
     UserSigninVo selSigninedUserInfoByUid(String uid);
     UserSigninProcDto selUserInfoByUid(String uid);
+    UserInfoVo selUserProfile(int targetIuser);
 }

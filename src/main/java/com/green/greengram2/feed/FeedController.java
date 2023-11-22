@@ -3,6 +3,8 @@ package com.green.greengram2.feed;
 import com.green.greengram2.ResVo;
 import com.green.greengram2.feed.model.*;
 import io.swagger.v3.oas.annotations.*;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,10 +45,13 @@ public class FeedController {
                 .rowCount(ROW_COUNT)
                 .build());
     }
-    @Operation(summary = "좋아요 처리", description = "좋아요 결과 : 1, 취소 : 2")
+    @Operation(summary = "좋아요 처리", description = "좋아요 : 1, 취소 : 2")
     @Parameters(value = {
             @Parameter(name = "ifeed", description = "좋아요 누를 피드의 ifeed"),
             @Parameter(name = "iuser", description = "로그인한 유저의 iuser")
+    })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "좋아요 처리: result(1), 좋아요 취소: result(0)")
     })
     @GetMapping("/fav")     // insert : 1, delete : 0
     public ResVo toggleFav(FeedFavDto dto){ //get방식은 @RequestBody 안 씀. @PathVariable 쓰는 편

@@ -62,4 +62,7 @@ public class UserService {
         }
         return result;
     }
+    public UserInfoVo getProfileInfo(int targetIuser){
+        return mapper.selUserProfile(targetIuser);
+    }
 }
