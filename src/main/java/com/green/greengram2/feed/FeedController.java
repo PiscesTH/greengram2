@@ -1,9 +1,7 @@
 package com.green.greengram2.feed;
 
 import com.green.greengram2.ResVo;
-import com.green.greengram2.feed.model.FeedInsDto;
-import com.green.greengram2.feed.model.FeedSelDto;
-import com.green.greengram2.feed.model.FeedSelVo;
+import com.green.greengram2.feed.model.*;
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -43,5 +41,9 @@ public class FeedController {
                 .startIdx((page - 1) * ROW_COUNT)
                 .rowCount(ROW_COUNT)
                 .build());
+    }
+    @GetMapping("/fav")     // insert : 1, delete : 2
+    public ResVo toggleFav(FeedFavDto dto){ //get방식은 @RequestBody 안 씀. @PathVariable 쓰는 편
+        return service.toggleFav(dto);
     }
 }

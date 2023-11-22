@@ -14,6 +14,7 @@ import java.util.List;
 public class FeedService {
     private final FeedMapper mapper;
     private final FeedPicsMapper picsMapper;
+    private final FeedFavMapper favMapper;
 
     public ResVo postFeed(FeedInsDto dto){
         FeedInsPrcoDto dto1 = FeedInsPrcoDto.builder()
@@ -36,5 +37,13 @@ public class FeedService {
             vo.setPics(picsMapper.selFeedPicsAll(vo.getIfeed()));
         }
         return list;
+    }
+    public ResVo toggleFav(FeedFavDto dto){
+        int result = favMapper.delFav(dto);
+        if (result == 0){
+            result = favMapper.insFav(dto);
+            return new ResVo(result);
+        }
+        return new ResVo(2);
     }
 }
