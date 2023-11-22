@@ -10,4 +10,5 @@ public interface UserMapper {
     UserSigninVo selSigninedUserInfoByUid(String uid);
     UserSigninProcDto selUserInfoByUid(String uid);
     UserInfoVo selUserProfile(int targetIuser);
+    int updUserPic(UserpatchPicDto dto);
 }

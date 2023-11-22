@@ -65,4 +65,9 @@ public class UserService {
     public UserInfoVo getProfileInfo(int targetIuser){
         return mapper.selUserProfile(targetIuser);
     }
+
+    public ResVo patchUserPic(UserpatchPicDto dto){
+        int result = mapper.updUserPic(dto);
+        return new ResVo(result);
+    }
 }

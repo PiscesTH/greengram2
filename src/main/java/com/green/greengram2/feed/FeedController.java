@@ -57,4 +57,9 @@ public class FeedController {
     public ResVo toggleFav(FeedFavDto dto){ //get방식은 @RequestBody 안 씀. @PathVariable 쓰는 편
         return service.toggleFav(dto);
     }
+
+    @PostMapping("/comment")
+    private ResVo postComment(@RequestBody FeedCommentInsDto dto){
+        return service.postComment(dto);
+    }
 }

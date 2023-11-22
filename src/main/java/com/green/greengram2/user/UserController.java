@@ -1,10 +1,7 @@
 package com.green.greengram2.user;
 
 import com.green.greengram2.ResVo;
-import com.green.greengram2.user.model.UserInfoVo;
-import com.green.greengram2.user.model.UserSigninDto;
-import com.green.greengram2.user.model.UserSigninVo;
-import com.green.greengram2.user.model.UserSignupDto;
+import com.green.greengram2.user.model.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -52,5 +49,10 @@ public class UserController {
     @GetMapping
     public UserInfoVo getProfileInfo(@RequestParam(value = "target_iuser") int targetIuser) { // [ value = ]생략 가능
         return service.getProfileInfo(targetIuser);
+    }
+
+    @PatchMapping("/pic")
+    public ResVo patchUserPic(@RequestBody UserpatchPicDto dto){
+        return service.patchUserPic(dto);
     }
 }

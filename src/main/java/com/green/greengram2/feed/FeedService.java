@@ -15,6 +15,7 @@ public class FeedService {
     private final FeedMapper mapper;
     private final FeedPicsMapper picsMapper;
     private final FeedFavMapper favMapper;
+    private final FeedCommentMapper commentMapper;
 
     public ResVo postFeed(FeedInsDto dto){
         FeedInsPrcoDto dto1 = FeedInsPrcoDto.builder()
@@ -45,5 +46,9 @@ public class FeedService {
             return new ResVo(insResult);
         }
         return new ResVo(0);
+    }
+    public ResVo postComment(FeedCommentInsDto dto){
+        int result = commentMapper.insComment(dto);
+        return new ResVo(result);
     }
 }

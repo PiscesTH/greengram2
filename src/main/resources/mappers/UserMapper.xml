@@ -31,7 +31,7 @@
     </select>
 
     <select id="selUserProfile">
-        SELECT COUNT(DISTINCT B.ifeed) AS feedCnt, COUNT(C.iuser) AS favCnt,
+        SELECT COUNT(DISTINCT B.ifeed) AS feedCnt, COUNT(C.iuser) AS favCnt, A.pic,
         A.nm, DATE(A.created_at) AS createdAt
         FROM t_user A
         LEFT JOIN t_feed B
@@ -40,4 +40,10 @@
         ON B.ifeed = C.ifeed
         WHERE A.iuser = #{targetIuser}
     </select>
+
+    <update id="updUserPic">
+        UPDATE t_user
+        SET pic = #{pic}
+        WHERE iuser = #{iuser}
+    </update>
 </mapper>
