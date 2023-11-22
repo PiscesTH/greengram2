@@ -39,11 +39,11 @@ public class FeedService {
         return list;
     }
     public ResVo toggleFav(FeedFavDto dto){
-        int result = favMapper.delFav(dto);
-        if (result == 0){
-            result = favMapper.insFav(dto);
-            return new ResVo(result);
+        int delResult = favMapper.delFav(dto);
+        if (delResult == 0){
+            int insResult = favMapper.insFav(dto);
+            return new ResVo(insResult);
         }
-        return new ResVo(2);
+        return new ResVo(0);
     }
 }

@@ -30,6 +30,7 @@ public class FeedController {
         return service.postFeed(dto);
     }
 
+    @Operation(summary = "피드 불러오기", description = "페이지당 30개의 피드")
     @GetMapping
     public List<FeedSelVo> getFeedAll(int page, int loginedIuser,
                                       @RequestParam(defaultValue = "0", required = false) int targetIuser) {
@@ -42,7 +43,12 @@ public class FeedController {
                 .rowCount(ROW_COUNT)
                 .build());
     }
-    @GetMapping("/fav")     // insert : 1, delete : 2
+    @Operation(summary = "좋아요 처리", description = "좋아요 결과 : 1, 취소 : 2")
+    @Parameters(value = {
+            @Parameter(name = "ifeed", description = "좋아요 누를 피드의 ifeed"),
+            @Parameter(name = "iuser", description = "로그인한 유저의 iuser")
+    })
+    @GetMapping("/fav")     // insert : 1, delete : 0
     public ResVo toggleFav(FeedFavDto dto){ //get방식은 @RequestBody 안 씀. @PathVariable 쓰는 편
         return service.toggleFav(dto);
     }
