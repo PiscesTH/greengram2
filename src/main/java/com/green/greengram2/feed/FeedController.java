@@ -86,6 +86,6 @@ public class FeedController {
 
     @DeleteMapping()
     public ResVo delFeed(FeedDelDto dto) {
-        return service.delFeed(dto);
+        return service.delOneFeed(dto);
     }
 }
