@@ -58,8 +58,19 @@ public class FeedController {
         return service.toggleFav(dto);
     }
 
+    @Operation(summary = "댓글 등록", description = "댓글 작성 성공 : 1, 실패 : 0")
+    @Parameters(value = {
+            @Parameter(name = "iuser", description = "로그인 한 유저"),
+            @Parameter(name = "ifeed", description = "댓글을 달 피드"),
+            @Parameter(name = "comment", description = "댓글 내용")
+    })
     @PostMapping("/comment")
     private ResVo postComment(@RequestBody FeedCommentInsDto dto){
         return service.postComment(dto);
+    }
+
+    @GetMapping("/comment")
+    public List<FeedCommentSelVo> getCommentAll(int ifeed) {     //댓글 더보기 눌렀을 때 나오는 댓글
+        return service.getCommentAll(ifeed);
     }
 }

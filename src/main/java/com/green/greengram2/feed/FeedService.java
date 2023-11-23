@@ -17,7 +17,7 @@ public class FeedService {
     private final FeedFavMapper favMapper;
     private final FeedCommentMapper commentMapper;
 
-    public ResVo postFeed(FeedInsDto dto){
+    public ResVo postFeed(FeedInsDto dto) {
         FeedInsPrcoDto dto1 = FeedInsPrcoDto.builder()
                 .iuser(dto.getIuser())
                 .contents(dto.getContents())
@@ -31,24 +31,47 @@ public class FeedService {
         int result2 = mapper.insFeedPic(dto2);
         return new ResVo(dto1.getIfeed());
     }
+
     //N + 1 허용 방법
-    public List<FeedSelVo> getFeedAll(FeedSelDto dto){
+    public List<FeedSelVo> getFeedAll(FeedSelDto dto) {
         List<FeedSelVo> list = mapper.selFeedAll(dto);
         for (FeedSelVo vo : list) {
             vo.setPics(picsMapper.selFeedPicsAll(vo.getIfeed()));
+
+            List<FeedCommentSelVo> comments = commentMapper.selCommentAll(FeedCommentSelDto.builder()
+                    .ifeed(vo.getIfeed())
+                    .startIdx(0)
+                    .rowCount(4)
+                    .build());
+
+            if (comments.size() == 4) {
+                vo.setIsMoreComment(1);
+                comments.remove(comments.size() - 1);
+            }
+            vo.setComments(comments);
         }
         return list;
     }
-    public ResVo toggleFav(FeedFavDto dto){
+
+    public ResVo toggleFav(FeedFavDto dto) {
         int delResult = favMapper.delFav(dto);
-        if (delResult == 0){
+        if (delResult == 0) {
             int insResult = favMapper.insFav(dto);
             return new ResVo(insResult);
         }
         return new ResVo(0);
     }
-    public ResVo postComment(FeedCommentInsDto dto){
+
+    public ResVo postComment(FeedCommentInsDto dto) {
         int result = commentMapper.insComment(dto);
         return new ResVo(result);
+    }
+
+    public List<FeedCommentSelVo> getCommentAll(int ifeed) {
+        return commentMapper.selCommentAll(FeedCommentSelDto.builder()
+                .ifeed(ifeed)
+                .startIdx(4)
+                .rowCount(9999)
+                .build());
     }
 }

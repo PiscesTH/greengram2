@@ -15,4 +15,6 @@ public class FeedSelVo {
     private String createdAt;
     private int isFav;
     private List<String> pics;
+    private List<FeedCommentSelVo> comments;
+    private int isMoreComment;
 }
