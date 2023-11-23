@@ -25,4 +25,9 @@
         DELETE FROM t_feed_comment
         WHERE ifeed_comment = #{ifeedComment} AND iuser = #{loginedIuser}
     </delete>
+
+    <delete id="delCommentByIfeed">
+        DELETE FROM t_feed_comment
+        WHERE ifeed = #{ifeed}
+    </delete>
 </mapper>

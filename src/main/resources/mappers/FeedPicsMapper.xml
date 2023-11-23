@@ -8,4 +8,9 @@
         FROM t_feed_pics
         WHERE ifeed = #{ifeed}
     </select>
+
+    <delete id="delPicsByIfeed">
+        DELETE FROM t_feed_pics
+        WHERE ifeed = #{ifeed}
+    </delete>
 </mapper>

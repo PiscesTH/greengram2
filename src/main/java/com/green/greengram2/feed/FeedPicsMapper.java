@@ -8,4 +8,5 @@ import java.util.List;
 @Mapper
 public interface FeedPicsMapper {
     List<String> selFeedPicsAll(int ifeed);
+    int delPicsByIfeed(int ifeed);
 }

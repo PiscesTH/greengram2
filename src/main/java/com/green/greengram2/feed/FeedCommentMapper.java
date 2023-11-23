@@ -9,5 +9,6 @@ import java.util.List;
 public interface FeedCommentMapper {
     int insComment(FeedCommentInsProcDto dto);
     List<FeedCommentSelVo> selCommentAll(FeedCommentSelDto dto);
-    int delComment(FeedDelDto dto);
+    int delComment(FeedCommentDelDto dto);
+    int delCommentByIfeed(int ifeed);
 }

@@ -78,9 +78,14 @@ public class FeedController {
     @DeleteMapping("/comment")
     public ResVo delComment(@RequestParam("ifeed_comment") int ifeedComment,
                             @RequestParam("logined_iuser") int loginedIuser) {
-        return service.delComment(FeedDelDto.builder()
+        return service.delComment(FeedCommentDelDto.builder()
                 .ifeedComment(ifeedComment)
                 .loginedIuser(loginedIuser)
                 .build());
+    }
+
+    @DeleteMapping()
+    public ResVo delFeed(FeedDelDto dto) {
+        return service.delFeed(dto);
     }
 }

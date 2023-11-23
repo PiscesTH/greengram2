@@ -83,11 +83,33 @@ public class FeedService {
                 .build());
     }
 
-    public ResVo delComment(FeedDelDto dto) {
+    public ResVo delComment(FeedCommentDelDto dto) {
         int result = commentMapper.delComment(dto);
         if (result == 1) {
             return new ResVo(dto.getIfeedComment());
         }
         return new ResVo(result);
+    }
+
+    public ResVo delFeed(FeedDelDto dto){
+        int selResult = mapper.selFeedToDel(dto);
+        if(selResult == 0){
+            return new ResVo(0);
+        }
+        int picsResult = picsMapper.delPicsByIfeed(dto.getIfeed());
+        int favResult = favMapper.delFavByIfeed(dto.getIfeed());
+        int commentResult = commentMapper.delCommentByIfeed(dto.getIfeed());
+        int feedResult = mapper.delFeed(dto);
+        return new ResVo(feedResult);
+    }
+
+    public ResVo delOneFeed(FeedDelDto dto){
+        int selResult = mapper.selFeedToDel(dto);
+        if(selResult == 0){
+            return new ResVo(0);
+        }
+        int delProcResult = mapper.delFeedPre(dto);
+        int delFeedResult = mapper.delFeed(dto);
+        return new ResVo(delFeedResult);
     }
 }

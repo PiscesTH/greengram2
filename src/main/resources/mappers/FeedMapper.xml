@@ -34,4 +34,26 @@
         LIMIT #{startIdx}, #{rowCount}
     </select>
 
+    <select id="selFeedToDel">
+        SELECT ifeed
+        FROM t_feed
+        WHERE iuser = #{iuser} and ifeed = #{ifeed}
+    </select>
+
+    <delete id="delFeed">
+        DELETE FROM t_feed
+        WHERE ifeed = #{ifeed} and iuser = #{iuser}
+    </delete>
+
+    <delete id="delFeedPre">
+        DELETE A, B, C
+        FROM t_feed T
+        LEFT JOIN t_feed_fav A
+        USING (ifeed)
+        left JOIN t_feed_pics B
+        USING (ifeed)
+        left JOIN t_feed_comment C
+        USING (ifeed)
+        WHERE ifeed = #{ifeed};
+    </delete>
 </mapper>

@@ -7,4 +7,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface FeedFavMapper {
     int delFav(FeedFavDto dto);
     int insFav(FeedFavDto dto);
+    int delFavByIfeed(int ifeed);
 }
