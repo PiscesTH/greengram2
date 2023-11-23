@@ -45,6 +45,7 @@ public class FeedController {
                 .rowCount(ROW_COUNT)
                 .build());
     }
+
     @Operation(summary = "좋아요 처리", description = "좋아요 : 1, 취소 : 2")
     @Parameters(value = {
             @Parameter(name = "ifeed", description = "좋아요 누를 피드의 ifeed"),
@@ -54,7 +55,7 @@ public class FeedController {
             @ApiResponse(responseCode = "200", description = "좋아요 처리: result(1), 좋아요 취소: result(0)")
     })
     @GetMapping("/fav")     // insert : 1, delete : 0
-    public ResVo toggleFav(FeedFavDto dto){ //get방식은 @RequestBody 안 씀. @PathVariable 쓰는 편
+    public ResVo toggleFav(FeedFavDto dto) { //get방식은 @RequestBody 안 씀. @PathVariable 쓰는 편
         return service.toggleFav(dto);
     }
 
@@ -65,12 +66,21 @@ public class FeedController {
             @Parameter(name = "comment", description = "댓글 내용")
     })
     @PostMapping("/comment")
-    private ResVo postComment(@RequestBody FeedCommentInsDto dto){
+    private ResVo postComment(@RequestBody FeedCommentInsDto dto) {
         return service.postComment(dto);
     }
 
     @GetMapping("/comment")
     public List<FeedCommentSelVo> getCommentAll(int ifeed) {     //댓글 더보기 눌렀을 때 나오는 댓글
         return service.getCommentAll(ifeed);
+    }
+
+    @DeleteMapping("/comment")
+    public ResVo delComment(@RequestParam("ifeed_comment") int ifeedComment,
+                            @RequestParam("logined_iuser") int loginedIuser) {
+        return service.delComment(FeedDelDto.builder()
+                .ifeedComment(ifeedComment)
+                .loginedIuser(loginedIuser)
+                .build());
     }
 }

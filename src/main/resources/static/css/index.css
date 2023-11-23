@@ -42,3 +42,5 @@ a { text-decoration: none; color: black; }
 .profile { object-fit: cover; border-radius: 50%; }
 
 .scroll_smooth { scroll-behavior: smooth; }
+
+.fa-trash { margin-left: 20px; color: red; }

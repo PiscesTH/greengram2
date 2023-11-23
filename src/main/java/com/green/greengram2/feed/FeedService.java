@@ -63,15 +63,31 @@ public class FeedService {
     }
 
     public ResVo postComment(FeedCommentInsDto dto) {
-        int result = commentMapper.insComment(dto);
+        FeedCommentInsProcDto pDto = FeedCommentInsProcDto.builder()
+                .comment(dto.getComment())
+                .ifeed(dto.getIfeed())
+                .iuser(dto.getIuser())
+                .build();
+        int result = commentMapper.insComment(pDto);
+        if (result == 1) {
+            return new ResVo(pDto.getIfeedComment());
+        }
         return new ResVo(result);
     }
 
     public List<FeedCommentSelVo> getCommentAll(int ifeed) {
         return commentMapper.selCommentAll(FeedCommentSelDto.builder()
                 .ifeed(ifeed)
-                .startIdx(4)
+                .startIdx(3)
                 .rowCount(9999)
                 .build());
+    }
+
+    public ResVo delComment(FeedDelDto dto) {
+        int result = commentMapper.delComment(dto);
+        if (result == 1) {
+            return new ResVo(dto.getIfeedComment());
+        }
+        return new ResVo(result);
     }
 }

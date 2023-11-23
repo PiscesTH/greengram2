@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.greengram2.feed.FeedCommentMapper">
-    <insert id="insComment">
+    <insert id="insComment" useGeneratedKeys="true" keyProperty="ifeedComment">
         INSERT INTO t_feed_comment
         SET iuser = #{iuser},
         ifeed = #{ifeed},
@@ -12,7 +12,7 @@
 
     <select id="selCommentAll">
         SELECT A.ifeed_comment AS ifeedComment, A.comment, A.created_at AS createdAt,
-            B.iuser AS writerIuser, B.nm AS writerNm, B.pic AS writerPic
+        B.iuser AS writerIuser, B.nm AS writerNm, B.pic AS writerPic
         FROM t_feed_comment A
         INNER JOIN t_user B
         ON A.iuser = B.iuser
@@ -20,4 +20,9 @@
         ORDER BY A.ifeed
         LIMIT #{startIdx}, #{rowCount}
     </select>
+
+    <delete id="delComment">
+        DELETE FROM t_feed_comment
+        WHERE ifeed_comment = #{ifeedComment} AND iuser = #{loginedIuser}
+    </delete>
 </mapper>
